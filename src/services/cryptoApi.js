@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 const cryptoApiHeaders = {
     'x-rapidapi-host': 'coinranking1.p.rapidapi.com',
-    'x-rapidapi-key': '71bd949779mshdef02ead95339a8p14dc1cjsn41ceb8e4ca82'
+    'x-rapidapi-key': process.env.REACT_APP_CRYPTO_API_KEY
 }
 const baseUrl = 'https://coinranking1.p.rapidapi.com';
 
@@ -21,6 +21,9 @@ export const cryptoApi = createApi({
         }),
         getCryptoHistory: builder.query({
             query: ({ coinId, timePeriod }) => createRequestWithParams(`/coin/${coinId}/history`, timePeriod)
+        }),
+        getExchanges: builder.query({
+            query: () => createRequest(`/exchanges`)
         })
     })
 });
@@ -28,20 +31,5 @@ export const cryptoApi = createApi({
 export const {
     // yukarıdaki getCryptos ile aynı isimde olmalı, başında get sonunda Query olmalı isimlendirme önemli
     // böylelikle redux hooku kendi ayarlıyor
-    useGetCryptosQuery, useGetCryptoDetailsQuery, useGetCryptoHistoryQuery
+    useGetCryptosQuery, useGetCryptoDetailsQuery, useGetCryptoHistoryQuery, useGetExchangesQuery
 } = cryptoApi;
-// var options = {
-//     method: 'GET',
-//     url: 'https://coinranking1.p.rapidapi.com/exchanges',
-//     params: {
-//       referenceCurrencyUuid: 'yhjMzLPhuIDl',
-//       limit: '50',
-//       offset: '0',
-//       orderBy: '24hVolume',
-//       orderDirection: 'desc'
-//     },
-//     headers: {
-//       'x-rapidapi-host': 'coinranking1.p.rapidapi.com',
-//       'x-rapidapi-key': '71bd949779mshdef02ead95339a8p14dc1cjsn41ceb8e4ca82'
-//     }
-//   };

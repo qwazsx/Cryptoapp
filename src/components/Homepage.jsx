@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 
 import { useGetCryptosQuery } from '../services/cryptoApi'
 import { Cryptocurrencies, News } from '../components'
+import Loader from './Loader'
 
 //Typography.Title'ı çok kullanacağımız için bir const olarak tanımladık
 const { Title } = Typography
@@ -15,7 +16,7 @@ const Homepage = () => {
 
     // console.log({ data })
 
-    if (isFetching) return 'Loading...'
+    if (isFetching) return <Loader />;
 
     return (
         <>
